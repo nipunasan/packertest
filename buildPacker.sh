@@ -1,3 +1,3 @@
 #!/bin/bash -xe
 cd packer
-packer build -force -debug -machine-readable .
+packer build -force -machine-readable .
