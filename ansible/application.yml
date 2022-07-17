@@ -72,9 +72,9 @@
 
     - name: install git
       ansible.builtin.yum:
-        - state: latest
-          name:
-            - git
+        state: latest
+        name:
+          - git
 
     - name: add application files
       ansible.builtin.git:
@@ -83,6 +83,6 @@
 
     - name: remove git
       ansible.builtin.yum:
-        - state: absent
-          name:
-            - git
+        state: absent
+        name:
+          - git
