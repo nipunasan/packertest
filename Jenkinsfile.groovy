@@ -16,7 +16,7 @@ pipeline {
                 sh 'pwd && ls -lr'
                 sh 'rm -frv build.*'
                 sh 'rm -frv init.*'
-                sh label: '', script: "${env.PACKER_SH} ./packer/"
+                sh label: '', script: "cd ./packer/ && ${env.PACKER_SH} ."
                 // sh 'chmod +x buildPacker.sh'
                 // sh 'bash -x ./buildPacker.sh'
                 // sh 'packer build -machine-readable -parallel-builds=1 -timestamp-ui -force .'
