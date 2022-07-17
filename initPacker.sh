@@ -1,3 +1,3 @@
 #!/bin/bash -xe
 cd packer
-packer init .
+packer init -machine-readable .
