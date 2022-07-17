@@ -7,7 +7,7 @@ pipeline {
                 sh 'pwd && ls -lr'
                 sh 'rm -frv build.*'
                 sh 'rm -frv init.*'
-                sh label: '', script: 'packer init -machine-readable -parallel-builds=1 -timestamp-ui .'
+                sh label: '', script: 'packer init -machine-readable -parallel-builds=1 -timestamp-ui ./packer'
             }
         }
         stage('Packer - Build') {
@@ -16,7 +16,7 @@ pipeline {
                 sh 'pwd && ls -lr'
                 sh 'rm -frv build.*'
                 sh 'rm -frv init.*'
-                sh label: '', script: "${env.PACKER_SH} ."
+                sh label: '', script: "${env.PACKER_SH} ./packer/"
                 // sh 'chmod +x buildPacker.sh'
                 // sh 'bash -x ./buildPacker.sh'
                 // sh 'packer build -machine-readable -parallel-builds=1 -timestamp-ui -force .'
