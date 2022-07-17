@@ -9,8 +9,7 @@ pipeline {
         }
         stage('Packer - Build') {
             steps{
-                sh 'cd /var/lib/jenkins/workspace/packer-build/packer'
-                sh 'packer build -force .'
+                sh 'cd /var/lib/jenkins/workspace/packer-build/packer && packer build -force .'
             }
         }
     }
