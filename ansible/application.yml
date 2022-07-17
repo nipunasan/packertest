@@ -48,16 +48,15 @@
 
     - name: Install php
       yum:
-        name: "{{item}}"
         state: latest
-      with_items:
-        - php
-        - php-common
-        - php-cli
-        - php-gd
-        - php-curl
-        - php-mysql
-        - php-fpm
+        name:
+          - php
+          - php-common
+          - php-cli
+          - php-gd
+          - php-curl
+          - php-mysql
+          - php-fpm
 
     - name: copy conf file
       ansible.builtin.copy:
