@@ -6,7 +6,7 @@ pipeline {
                 sh 'cd ./packer/'
                 sh 'rm -frv build.*'
                 sh 'rm -frv init.*'
-                sh 'packer init -machine-readable -parallel-builds=1 -timestamp-ui .'
+                sh label: '', script: 'packer init -machine-readable -parallel-builds=1 -timestamp-ui .'
             }
         }
         stage('Packer - Build') {
