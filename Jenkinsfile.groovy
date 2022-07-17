@@ -4,7 +4,8 @@ pipeline {
         stage('Packer - Build init') {
             steps{
                 sh 'cd ./packer/'
-                sh 'rm -frv build.* init.*'
+                sh 'rm -frv build.*'
+                sh 'rm -frv init.*'
                 sh 'packer init -machine-readable -parallel-builds=1 -timestamp-ui .'
             }
         }
@@ -12,7 +13,8 @@ pipeline {
             steps{
                 sh 'cd ./packer/'
                 sh 'pwd && ls -lr'
-                sh 'rm -frv build.* init.*'
+                sh 'rm -frv build.*'
+                sh 'rm -frv init.*'
                 sh 'packer build -machine-readable -parallel-builds=1 -timestamp-ui -force .'
                 sh 'for i in $(seq 100); do echo "fuck_"$i; done'
             }
