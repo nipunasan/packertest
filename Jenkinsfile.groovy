@@ -5,7 +5,7 @@ pipeline {
             steps{
                 sh """
                 #!/bin/bash
-                cd /var/lib/jenkins/workspace/TestProjectScripts/create_base_image/packer/
+                cd ./packer/
                 /sbin/packer init .
                 /sbin/packer build -force .
                 """
