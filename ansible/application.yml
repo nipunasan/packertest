@@ -73,6 +73,5 @@
 
     - name: add application files
       ansible.builtin.git:
-        accept_newhostkey: yes
         repo: https://github.com/nipunasan/testRepo.git
         dest: /var/www/html/
