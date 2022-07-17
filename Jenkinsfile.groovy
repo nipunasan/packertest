@@ -3,13 +3,13 @@ pipeline {
     stages {        
         stage('Packer - Build init') {
             steps{
-                sh 'cd ./packer/'
+                sh 'cd /var/lib/jenkins/workspace/packer-build/packer'
                 sh 'packer init .'
             }
         }
         stage('Packer - Build') {
             steps{
-                sh 'cd ./packer/'
+                sh 'cd /var/lib/jenkins/workspace/packer-build/packer'
                 sh 'packer build -force .'
             }
         }
