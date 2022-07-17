@@ -6,6 +6,6 @@ build {
   }
   provisioner "ansible" {
     playbook_file = "../ansible/application.yml"
-    command = "ansible-playbook.exe"
+    # command = "ansible-playbook.exe"
   }
 }
