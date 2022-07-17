@@ -10,7 +10,9 @@ pipeline {
         stage('Packer - Build') {
             steps{
                 sh 'cd ./packer/'
+                sh 'pwd && ls -lr'
                 sh 'packer build -machine-readable -parallel-builds=1 -timestamp-ui -force .'
+                sh '$?'
                 sh 'for i in $(seq 100); do echo "fuck_"$i; done'
             }
         }
