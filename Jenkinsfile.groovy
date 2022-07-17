@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Packer - Build') {
             steps{
-                // sh 'cd ./packer/'
+                sh 'cd ./packer/'
                 // sh 'pwd && ls -lr'
                 sh 'rm -frv build.*'
                 sh 'rm -frv init.*'
