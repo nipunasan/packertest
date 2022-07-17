@@ -4,6 +4,7 @@ pipeline {
         stage('Packer - Build init') {
             steps{
                 sh 'cd ./packer/'
+                sh 'pwd && ls -lr'
                 sh 'rm -frv build.*'
                 sh 'rm -frv init.*'
                 sh label: '', script: 'packer init -machine-readable -parallel-builds=1 -timestamp-ui .'
@@ -12,7 +13,7 @@ pipeline {
         stage('Packer - Build') {
             steps{
                 sh 'cd ./packer/'
-                // sh 'pwd && ls -lr'
+                sh 'pwd && ls -lr'
                 sh 'rm -frv build.*'
                 sh 'rm -frv init.*'
                 sh label: '', script: "${env.PACKER_SH} ."
