@@ -70,7 +70,19 @@
         regexp: "5VqEhUqfvqg="
         replace: "{{ document_root }}"
 
+    - name: install git
+      ansible.builtin.yum:
+        - state: latest
+          name:
+            - git
+
     - name: add application files
       ansible.builtin.git:
         repo: https://github.com/nipunasan/testRepo.git
         dest: /var/www/html/
+
+    - name: remove git
+      ansible.builtin.yum:
+        - state: absent
+          name:
+            - git
