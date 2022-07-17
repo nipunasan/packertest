@@ -4,12 +4,13 @@ pipeline {
         stage('Packer - Build init') {
             steps{
                 sh 'cd /var/lib/jenkins/workspace/packer-build/packer'
-                sh 'packer init .'
+                sh 'packer init -machine-readable .'
             }
         }
         stage('Packer - Build') {
             steps{
-                sh 'cd /var/lib/jenkins/workspace/packer-build/packer && packer build -force .'
+                sh 'cd /var/lib/jenkins/workspace/packer-build/packer'
+                sh 'packer build -machine-readable -force .'
             }
         }
     }
