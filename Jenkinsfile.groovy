@@ -16,7 +16,7 @@ pipeline {
                 sh 'rm -frv build.*'
                 sh 'rm -frv init.*'
                 sh 'chmod +x buildPacker.sh'
-                sh './buildPacker.sh'
+                sh 'bash -x ./buildPacker.sh'
                 // sh 'packer build -machine-readable -parallel-builds=1 -timestamp-ui -force .'
             }
         }
