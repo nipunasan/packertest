@@ -1,9 +1,6 @@
 pipeline {
     agent any
-    stages {
-        environment {
-            PACKER_LOG=1
-        }
+    stages {        
         stage('Packer - Build init') {
             steps{
                 sh 'cd ./packer/'
@@ -16,5 +13,8 @@ pipeline {
                 sh 'packer build -force .'
             }
         }
+    }
+    environment {
+            PACKER_LOG="1"
     }
 }
