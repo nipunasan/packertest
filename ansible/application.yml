@@ -1,0 +1,78 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  vars:
+    - file_name: testFilename
+  vars_files:
+    - ./vars.yml
+  tasks:
+    - name: add user
+      ansible.builtin.user:
+        name: ansible
+        shell: /bin/bash
+        create_home: yes
+        generate_ssh_key: yes
+        ssh_key_bits: 2048
+        ssh_key_file:
+          .ssh/id_rsa
+
+          #    - name: make ansible user sudoer
+          #      community.general.sudoers:
+          #        name: ansible-add
+          #        commands: ALL
+          #        user: ansible
+          #        validation: detect
+
+    - name: make ansible user sudoer
+      ansible.builtin.lineinfile:
+        path: "/etc/sudoers"
+        line: "ansible  ALL=(ALL)   NOPASSWD:ALL"
+        state: present
+        validate: "visudo -cf %s"
+
+    - name: add ansible ssh key
+      ansible.builtin.lineinfile:
+        path: "{{ authorized_keys_file }}"
+        state: present
+        create: true
+        line: "{{ ansible_ssh_public_key }}"
+        owner: ansible
+        group: ansible
+        mode: "0600"
+
+    - name: Install httpd
+      ansible.builtin.yum:
+        name: httpd
+        state: latest
+
+    - name: Install php
+      yum:
+        name: "{{item}}"
+        state: latest
+      with_items:
+        - php
+        - php-common
+        - php-cli
+        - php-gd
+        - php-curl
+        - php-mysql
+        - php-fpm
+
+    - name: copy conf file
+      ansible.builtin.copy:
+        src: "./files/testApp.conf"
+        dest: "/etc/httpd/conf.d/testApp.conf"
+        mode: "0644"
+
+    - name: change document root
+      ansible.builtin.replace:
+        path: "/etc/httpd/conf.d/testApp.conf"
+        regexp: "5VqEhUqfvqg="
+        replace: "{{ document_root }}"
+
+    - name: add application files
+      ansible.builtin.git:
+        accept_newhostkey: yes
+        repo: https://github.com/nipunasan/testRepo.git
+        dest: /var/www/html/
