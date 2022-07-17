@@ -6,8 +6,8 @@ pipeline {
                 sh """
                 #!/bin/bash
                 cd ./packer/
-                /sbin/packer init .
-                /sbin/packer build -force .
+                packer init .
+                packer build -force .
                 """
             }
         }
