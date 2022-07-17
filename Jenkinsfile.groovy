@@ -11,12 +11,13 @@ pipeline {
         }
         stage('Packer - Build') {
             steps{
-                sh 'cd ./packer/'
+                // sh 'cd ./packer/'
                 sh 'pwd && ls -lr'
                 sh 'rm -frv build.*'
                 sh 'rm -frv init.*'
-                sh 'packer build -machine-readable -parallel-builds=1 -timestamp-ui -force .'
-                sh 'for i in $(seq 100); do echo "fuck_"$i; done'
+                sh 'chmod +x buildPacker.sh'
+                sh './buildPacker.sh'
+                // sh 'packer build -machine-readable -parallel-builds=1 -timestamp-ui -force .'
             }
         }
     }
